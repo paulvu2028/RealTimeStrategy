@@ -4,6 +4,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class UnitSelectionHandler : MonoBehaviour
 {
     [SerializeField] private RectTransform unitSelectionArea = null;
@@ -45,14 +46,15 @@ public class UnitSelectionHandler : MonoBehaviour
 
     private void StartSelectionArea()
     {
-        if(Keyboard.current.leftShiftKey.isPressed){
+        if (!Keyboard.current.leftShiftKey.isPressed)
+        {
             foreach (Unit selectedUnit in SelectedUnits)
             {
                 selectedUnit.Deselect();
             }
-        }
 
-        SelectedUnits.Clear();
+            SelectedUnits.Clear();
+        }
 
         unitSelectionArea.gameObject.SetActive(true);
 
@@ -102,9 +104,7 @@ public class UnitSelectionHandler : MonoBehaviour
 
         foreach (Unit unit in player.GetMyUnits())
         {
-            if(SelectedUnits.Contains(unit)){
-                continue;
-            }
+            if (SelectedUnits.Contains(unit)) { continue; }
 
             Vector3 screenPosition = mainCamera.WorldToScreenPoint(unit.transform.position);
 
@@ -119,5 +119,6 @@ public class UnitSelectionHandler : MonoBehaviour
         }
     }
 }
+
 
 
